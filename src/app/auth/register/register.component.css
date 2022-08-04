@@ -1,0 +1,41 @@
+.restrict {
+  width: 45%;
+
+  border: 2px solid black;
+}
+
+.label_margin {
+  margin-top: 5px;
+  margin-left: 20px;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+.restrict2 {
+  width: 60%;
+  margin-bottom: 5px;
+  margin-left: 20px;
+}
+.restrict3 {
+  margin-bottom: 6px;
+}
+
+.form_details {
+  margin-right: 20px;
+}
+
+.btn_size {
+
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+h3 {
+  margin-left: 14px;
+}
+
+.text-danger {
+  margin-left: 18px;
+}

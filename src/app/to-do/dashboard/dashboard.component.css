@@ -1,0 +1,11 @@
+.none {
+  display: none;
+}
+.modal_container {
+  width: 372px;
+  height: 265px;
+  position: absolute;
+  top: 11%;
+  left: 72%;
+  border: 2px solid black;
+}

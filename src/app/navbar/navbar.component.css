@@ -1,0 +1,32 @@
+.modal_container {
+  width: 334px;
+  height: 281px;
+  position: absolute;
+  top: 11%;
+  left: 1%;
+  border: 2px solid black;
+}
+.hover:hover {
+  cursor: pointer;
+}
+
+.profile_data {
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+}
+
+.btn {
+  position: relative;
+  left: 28%;
+  top: 7%;
+}
+
+.form-control{
+  display: inline-block;
+  width: 171px;
+}
+.display {
+  margin-left: 20px;
+  margin-bottom: 18px;
+}

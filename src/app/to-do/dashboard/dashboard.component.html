@@ -1,0 +1,78 @@
+<div class="container-fluid bg-light">
+  <div class="container bg-light">
+    <div class="row mt-4" style="height: 500px">
+      <div class="col"></div>
+      <div class="col-md-6 bg-white shadow">
+        <div class="card bg-warning mt-4">
+          <h4 class="text-white ps-3 pt-2 pb-2">To Do List</h4>
+        </div>
+
+        <div class="shadow">
+          <div class="input-group p-4">
+            <input
+              name="task"
+              (input)="description = $any($event).target.value"
+              type="text"
+              class="form-control"
+              placeholder="Enter task"
+              aria-describedby="button-addon2"
+            />
+            <button
+              (click)="addNewTask()"
+              class="btn btn-outline-success"
+              type="button"
+            >
+              +
+            </button>
+          </div>
+        </div>
+        <h4 class="text-primary mt-4">Tasks :</h4>
+        <div style="overflow-y: auto; height: 350px">
+          <div class="m-3" *ngFor="let task of responseData">
+            <!-- TASKS -->
+            <div *ngIf="task.description" class="p-2 shadow border">
+              <div class="input-group row ps-3">
+                <div class="card col-md-10 border-0">{{ task.description}}</div>
+                <button
+                  (click)="editATask(task)"
+                  class="btn btn-outline-primary col me-2"
+                >
+                  e
+                </button>
+                <button
+                  (click)="deleteATask(task)"
+                  class="btn btn-outline-danger col"
+                >
+                  X
+                </button>
+              </div>
+            </div>
+            <!-- TASK END -->
+          </div>
+        </div>
+      </div>
+
+      <div class="col"></div>
+    </div>
+    <!-- MODAL -->
+    <div *ngIf="showModal"  class="modal_container ">
+      <div class="input-group p-4">
+        <input
+          name="task"
+          (input)="newTaskValue = $any($event).target.value"
+          type="text"
+          class="form-control"
+          placeholder="Enter task"
+          aria-describedby="button-addon2"
+        />
+        <button
+          (click)="addUpdatedTask()"
+          class="btn btn-outline-success"
+          type="button"
+        >
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

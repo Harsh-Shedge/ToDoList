@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ng-container *ngIf="setLoggedIn()">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" routerLink="/to-do-list"
+            >ToDoList</a
+          >
+        </li>
+        <li class="nav-item">
+          <a (click)="signOut()" class="nav-link" routerLink="/logout"
+            >Logout</a
+          >
+        </li>
+        <li class="nav-item">
+          <a (click)="showProfile()" class="nav-link hover">View Profile</a>
+        </li>
+      </ng-container>
+
+      <ng-container *ngIf="!setLoggedIn()">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" routerLink="/">Signin</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/register">Register</a>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+</nav>
+
+
+
+<!-- MODAL -->
+<div *ngIf="viewProfile" class="modal_container">
+  <div class="profile_data">
+    <h5 style="text-align: center; margin-bottom: 20px">Your Profile</h5>
+    <div class="display display_name">
+      Name : <span class="profile">{{ name }}</span>
+    </div>
+    <div class="display display_age">
+      Age : <span *ngIf="!enterAge" class="profile">{{ age }}</span>
+      <span *ngIf="enterAge"
+        ><input
+          (input)="changeAge = $any($event).target.value"
+          type="text"
+          class="form-control "
+          placeholder="Enter age"
+      /></span>
+    </div>
+    <div class="display display_email">
+      Email : <span class="profile">{{ email }}</span>
+    </div>
+  </div>
+  <button *ngIf="!showConfirmAge" (click)="updateAge()" type="button" class="btn btn-primary">
+    Update Age
+  </button>
+  <button *ngIf="showConfirmAge" (click)="confirmAge()" type="button" class="btn btn-primary">
+    Confirm Age
+  </button>
+</div>
