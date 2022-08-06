@@ -5,7 +5,6 @@ import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { SharedService } from './../../shared/shared.service';
 
-
 let viewPorfileArray = [];
 
 @Component({
@@ -32,10 +31,11 @@ export class SigninComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private sharedService:SharedService
-
+    private sharedService: SharedService
   ) {}
 
+  signInSuccess = false;
+  errorInSignIn = false;
   ngOnInit(): void {}
 
   onSubmit() {
@@ -45,23 +45,28 @@ export class SigninComponent implements OnInit {
     console.log(this.registerUserData);
     if (!this.authForm.valid) {
       return;
-    } else if (!this.authForm.valid) {
-      alert('Check all filled details');
-      return;
-    }
-    this.router.navigateByUrl('/to-do-list');
+    } 
+
     this.auth.loginUser(this.registerUserData).subscribe(
       (res) => {
         console.log(res);
+        localStorage.setItem('token', res.token);
+        this.signInSuccess = false;
+        // setTimeout(()=>{
+        //   this.router.navigateByUrl('/to-do-list')
+        //   this.signInSuccess=false
+        // },3000);
+        this.router.navigateByUrl('/to-do-list');
         viewPorfileArray = res.user;
-        this.sharedService.setData(res.user)
+        this.sharedService.setData(res.user);
 
         console.log(viewPorfileArray);
-        localStorage.setItem('token', res.token);
       },
-      (err) => console.log(err)
+      (err) => {
+        console.log(err);
+        this.errorInSignIn = true;
+        setTimeout(() => (this.errorInSignIn = false), 2000);
+      }
     );
   }
 }
-
-

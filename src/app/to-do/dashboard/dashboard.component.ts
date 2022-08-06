@@ -16,10 +16,12 @@ export class DashboardComponent implements OnInit {
   taskArrayIndex: number;
 
   constructor(private crudService: CrudService) {
-    this.getTasks();
+    
   }
 
-  ngOnInit(): any {}
+  ngOnInit(): any {
+    this.getTasks();
+  }
 
   // ADDING NEW TASK IN TODO LIST
   addNewTask() {

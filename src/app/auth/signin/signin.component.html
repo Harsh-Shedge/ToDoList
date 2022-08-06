@@ -14,11 +14,17 @@
     <div
       class="text-danger"
       *ngIf="
-        authForm.get('useremail').touched && !authForm.get('useremail').valid ||(isSignedIn || (authForm.get('useremail').value|json)==='')
+        (authForm.get('useremail').touched &&
+          !authForm.get('useremail').valid) ||
+        (isSignedIn && authForm.get('useremail').value === '')
       "
     >
       Enter valid email
     </div>
+    <!-- {{ authForm.get('useremail').touched}}
+    {{!authForm.get('useremail').valid}}
+    {{isSignedIn}}
+    {{(authForm.get('useremail').value)===''}} -->
 
     <div
       class="text-danger"
@@ -39,7 +45,8 @@
     <div
       class="text-danger"
       *ngIf="
-        !authForm.get('password')?.valid && authForm.get('password')?.dirty ||(isSignedIn || (authForm.get('password').value|json)==='')
+        (authForm.get('password').touched && !authForm.get('password').valid) ||
+        (isSignedIn && authForm.get('password').value === '')
       "
     >
       Password must contain more than 6 characters
@@ -50,3 +57,9 @@
     </button>
   </div>
 </form>
+<div *ngIf="signInSuccess" class="alert alert-success" role="alert">
+  Signin Successful
+</div>
+<div *ngIf="errorInSignIn" class="alert alert-danger" role="alert">
+  Signin Error
+</div>

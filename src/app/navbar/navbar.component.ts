@@ -21,9 +21,9 @@ export class NavbarComponent implements OnInit {
   showConfirmAge = false;
   changeAge = '';
 
-  isLoggedIn = this.authService.loggedIn()
+  isLoggedIn = this.authService.loggedIn();
 
-  setLoggedIn(){
+  setLoggedIn() {
     return this.authService.loggedIn();
   }
 
@@ -37,7 +37,6 @@ export class NavbarComponent implements OnInit {
     this.authService.signedin$.subscribe((signedin) => {
       this.signedin = signedin;
     });
-
   }
 
   updateAge() {
@@ -65,22 +64,32 @@ export class NavbarComponent implements OnInit {
   enterNewAge(age: any) {
     this.age = age;
   }
+
+  // LOGOUT LOGIC
   signOut() {
+    this.viewProfile = false;
     this.authService.logOutUser().subscribe(
-      (res) => console.log(res),
+      (res) => {
+        console.log(res);
+        if (res.success) {
+          localStorage.removeItem('token');
+
+          !!!localStorage.getItem('token') && this.router.navigateByUrl('/');
+
+          this.setLoggedIn();
+        }
+      },
       (err) => console.log(err)
     );
-    this.router.navigateByUrl('/');
-    localStorage.removeItem('token')
-    this.setLoggedIn()
-    this.viewProfile=false
   }
+
+  // SHOW USER PROFILE
   showProfile() {
     this.viewProfile = !this.viewProfile;
     this.profileData = this.sharedService.getData();
     console.log(`ProfileData ${this.profileData}`);
     this.updatedData = JSON.stringify(this.profileData);
-    console.log(this.updatedData)
+    console.log(this.updatedData);
     console.log(JSON.parse(this.updatedData));
     // this.age = this.updatedData.slice(7, 9);
     this.age = JSON.parse(this.updatedData).age;
